@@ -46,5 +46,6 @@ Ron Kahn — Lahore, Pakistan. Building Almost OS to fix AI-built software frust
 Instagram: @ve9us109
 Live: https://us13.vercel.app
 GitHub: your-org/almost-os
+email Venusplaza7@gmail.com
 
 ⭐ Star this repo if you want big companies to notice — stars = attention.
