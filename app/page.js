@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function AlmostOS() {
   const [endpoint, setEndpoint] = useState("/api/spend");
-  const [input, setInput] = useState('{
-  "amount": 50,
-  "reason": "OpenAI API"
-}');
+  const [input, setInput] = useState(`{\n  "amount": 50,\n  "reason": "OpenAI API"\n}`);
   const [output, setOutput] = useState('{"logs":[]}');
   const [loading, setLoading] = useState(false);
 
