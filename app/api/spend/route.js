@@ -1,4 +1,4 @@
-import { supabase } from '../../../lib/supabase.js'
+import { supabase } from '../../../lib/supabase'
 export async function GET() {
   const { data } = await supabase.from('spend_logs').select('*').order('created_at',{ascending:false}).limit(20)
   return Response.json({ logs:data })
