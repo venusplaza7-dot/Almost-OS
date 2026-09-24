@@ -1,8 +1,7 @@
-
-import { fireproofPR } from '../../../lib/fireproof.js'
-import { checkSpend } from '../../../lib/spendFirewall.js'
-import { publishFix } from '../../../lib/antiFolio.js'
-import { supabase } from '../../../lib/supabase.js'
+import { fireproofPR } from '../../../lib/fireproof'
+import { checkSpend } from '../../../lib/spendFirewall'
+import { publishFix } from '../../../lib/antiFolio'
+import { supabase } from '../../../lib/supabase'
 
 export async function POST(req) {
   const payload = await req.json()
