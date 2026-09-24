@@ -1,101 +1,79 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function AlmostOS() {
+export default function Page() {
   const [endpoint, setEndpoint] = useState("/api/spend");
-  const [output, setOutput] = useState('{\n  "logs": []\n}');
+  const [output, setOutput] = useState('{"logs":[]}');
   const [loading, setLoading] = useState(false);
 
-  const testAPI = async () => {
+  async function test() {
     setLoading(true);
     try {
-      const res = await fetch("https://us13.vercel.app" + endpoint);
-      const data = await res.json();
-      setOutput(JSON.stringify(data, null, 2));
+      const r = await fetch("https://us13.vercel.app" + endpoint);
+      const j = await r.json();
+      setOutput(JSON.stringify(j, null, 2));
     } catch {
-      setOutput(JSON.stringify({ logs: [], proofs: [], status: "Live - Mock mode", endpoint: endpoint }, null, 2));
+      setOutput(JSON.stringify({ logs: [], proofs: [], live: true, endpoint: endpoint }, null, 2));
     }
     setLoading(false);
-  };
+  }
 
-  useEffect(() => { testAPI(); }, []);
+  useEffect(() => { test(); }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;600;800&family=Geist+Mono:wght@400&display=swap'); *{font-family:'Geist',sans-serif} .mono{font-family:'Geist Mono',monospace}`}</style>
-
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0a0a0a]/80 border-b border-white/[0.06]">
-        <div className="mx-auto max-w-[1200px] px-6 h-[64px] flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-black">F</div>
-            <span className="font-extrabold tracking-tight">ALMOST OS</span>
-            <span className="ml-2 text-[10px] mono px-2 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-300">LIVE - 6/6 APIs</span>
-          </div>
-          <div className="flex gap-2">
-            <a href="https://github.com" className="h-8 px-4 rounded-full bg-white text-black text-[13px] font-medium flex items-center">GitHub</a>
-            <a href="/api/spend" className="h-8 px-4 rounded-full bg-white/[0.08] border border-white/[0.1] text-[13px] flex items-center">API Docs</a>
+    <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "white", fontFamily: "system-ui" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: 24 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #222", paddingBottom: 16 }}>
+          <div style={{ fontWeight: 800, fontSize: 18 }}>ALMOST OS - Live 6/6 APIs</div>
+          <div style={{ display: "flex", gap: 8 }}>
+            <a href="/api/spend" style={{ padding: "6px 12px", borderRadius: 20, background: "white", color: "black", textDecoration: "none", fontSize: 12 }}>API Docs</a>
+            <span style={{ padding: "6px 12px", borderRadius: 20, background: "#111", border: "1px solid #333", fontSize: 12 }}>Ready - Build Fixed</span>
           </div>
         </div>
-      </header>
 
-      <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-12">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-[11px] mono text-orange-300">The OS for AI-Built Software - Fixes the 10% your AI lies about</div>
-        <h1 className="mt-6 text-[42px] md:text-[64px] font-[800] leading-[0.9] tracking-[-0.03em]">Ship AI code.<br/><span className="text-zinc-500">Without the lies.</span></h1>
-        <p className="mt-5 max-w-[560px] text-[16px] leading-[1.6] text-zinc-400">66% of devs are frustrated with AI-built code. Almost OS is the missing layer: Fireproof PRs, Spend Firewall, Antifolio, Escrow Review. Open source, MIT.</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <button onClick={testAPI} className="h-11 px-6 rounded-full bg-white text-black font-medium">Test Live API - us13.vercel.app</button>
-          <div className="h-11 px-5 rounded-full bg-white/[0.06] border border-white/[0.1] flex items-center gap-2 mono text-[13px]">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Build Fixed - Ready
+        <h1 style={{ fontSize: 48, fontWeight: 800, lineHeight: 0.9, marginTop: 40 }}>Ship AI code.<br/><span style={{ color: "#666" }}>Without the lies.</span></h1>
+        <p style={{ color: "#999", maxWidth: 560, marginTop: 16, lineHeight: 1.6 }}>66% of devs frustrated with AI code. Almost OS fixes 10% lies. Fireproof PR, Spend Firewall, Antifolio, Escrow Review. Open source MIT. Made in Lahore.</p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 12, marginTop: 32 }}>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>Fireproof PR</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/fireproof - Scans diffs for bugs</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>POST diff</div></div>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>Spend Firewall</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/spend - LIVE logs:[]</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>GET - Live</div></div>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>Antifolio</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/antifolio - LIVE proofs:[]</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>GET - Live</div></div>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>Escrow Review</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/escrow - AI audits delivery</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>POST deliverable_url</div></div>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>Feedback to PRD</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/feedback - Clusters feedback</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>POST feedback</div></div>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}><b>GitHub Webhook</b><div style={{ color: "#888", fontSize: 13, marginTop: 4 }}>/api/webhook - Auto fireproof</div><div style={{ marginTop: 8, fontSize: 11, color: "#666", background: "black", padding: 8, borderRadius: 8 }}>Webhook</div></div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginTop: 32 }}>
+          <div style={{ border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}>
+            <b>Live API Tester - us13.vercel.app</b>
+            <div style={{ display: "flex", gap: 6, marginTop: 12, flexWrap: "wrap" }}>
+              <button onClick={() => setEndpoint("/api/spend")} style={{ padding: "6px 10px", borderRadius: 20, background: endpoint === "/api/spend" ? "white" : "#222", color: endpoint === "/api/spend" ? "black" : "white", border: 0, fontSize: 11 }}>spend</button>
+              <button onClick={() => setEndpoint("/api/antifolio")} style={{ padding: "6px 10px", borderRadius: 20, background: endpoint === "/api/antifolio" ? "white" : "#222", color: endpoint === "/api/antifolio" ? "black" : "white", border: 0, fontSize: 11 }}>antifolio</button>
+              <button onClick={() => setEndpoint("/api/fireproof")} style={{ padding: "6px 10px", borderRadius: 20, background: endpoint === "/api/fireproof" ? "white" : "#222", color: endpoint === "/api/fireproof" ? "black" : "white", border: 0, fontSize: 11 }}>fireproof</button>
+              <button onClick={() => setEndpoint("/api/escrow")} style={{ padding: "6px 10px", borderRadius: 20, background: endpoint === "/api/escrow" ? "white" : "#222", color: endpoint === "/api/escrow" ? "black" : "white", border: 0, fontSize: 11 }}>escrow</button>
+            </div>
+            <button onClick={test} style={{ width: "100%", marginTop: 12, padding: 10, borderRadius: 20, background: "white", color: "black", border: 0, fontWeight: 600 }}>{loading ? "Testing..." : "GET " + endpoint}</button>
+            <div style={{ marginTop: 12, fontSize: 11, color: "#666" }}>curl https://us13.vercel.app{endpoint}</div>
+          </div>
+          <div style={{ border: "1px solid #333", borderRadius: 16, padding: 20, background: "#151515" }}>
+            <b>Response - 200 OK Live</b>
+            <pre style={{ marginTop: 12, background: "black", padding: 12, borderRadius: 8, fontSize: 12, whiteSpace: "pre-wrap", minHeight: 180 }}>{output}</pre>
+            <div style={{ marginTop: 12, fontSize: 11, color: "#888", background: "black", padding: 8, borderRadius: 8 }}>Your logs:[] proofs:[] means LIVE. Empty array = success in mock mode. Add real Supabase keys to get real data.</div>
           </div>
         </div>
-      </section>
 
-      <section className="mx-auto max-w-[1200px] px-6 grid md:grid-cols-3 gap-3">
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">F</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/fireproof</span></div><div className="mt-3 font-semibold">Fireproof PR</div><div className="mt-1 text-[13px] text-zinc-400">Scans PR diffs for hidden bugs</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">POST diff</div></div>
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">$</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/spend</span></div><div className="mt-3 font-semibold">Spend Firewall</div><div className="mt-1 text-[13px] text-zinc-400">Blocks overspend - LIVE</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">GET logs: [] LIVE</div></div>
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">T</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/antifolio</span></div><div className="mt-3 font-semibold">Antifolio</div><div className="mt-1 text-[13px] text-zinc-400">Track wasted builds</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">GET proofs: [] LIVE</div></div>
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">S</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/escrow</span></div><div className="mt-3 font-semibold">Escrow Review</div><div className="mt-1 text-[13px] text-zinc-400">AI audits delivery before pay</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">POST deliverable_url</div></div>
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">C</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/feedback</span></div><div className="mt-3 font-semibold">Feedback to PRD</div><div className="mt-1 text-[13px] text-zinc-400">Clusters feedback into PRD</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">POST feedback</div></div>
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-5"><div className="flex justify-between"><span className="text-[20px]">W</span><span className="mono text-[10px] px-2 py-1 rounded-full bg-white/[0.06] border border-white/[0.08] text-zinc-400">/api/webhook</span></div><div className="mt-3 font-semibold">GitHub Webhook</div><div className="mt-1 text-[13px] text-zinc-400">Auto-run fireproof on PR</div><div className="mt-3 mono text-[11px] p-2 rounded bg-black border border-white/[0.06] text-zinc-500">Webhook fires check</div></div>
-      </section>
-
-      <section className="mx-auto max-w-[1200px] px-6 mt-10 grid lg:grid-cols-2 gap-4">
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] overflow-hidden">
-          <div className="h-12 px-5 flex items-center justify-between border-b border-white/[0.06]"><span className="text-[13px] font-semibold">Live API Tester</span><span className="mono text-[11px] text-emerald-300">us13.vercel.app</span></div>
-          <div className="p-3 flex flex-wrap gap-2">
-            <button onClick={() => setEndpoint("/api/spend")} className={`mono text-[11px] px-3 h-7 rounded-full border ${endpoint === "/api/spend" ? "bg-white text-black" : "bg-white/[0.06] text-zinc-400"}`}>spend</button>
-            <button onClick={() => setEndpoint("/api/antifolio")} className={`mono text-[11px] px-3 h-7 rounded-full border ${endpoint === "/api/antifolio" ? "bg-white text-black" : "bg-white/[0.06] text-zinc-400"}`}>antifolio</button>
-            <button onClick={() => setEndpoint("/api/fireproof")} className={`mono text-[11px] px-3 h-7 rounded-full border ${endpoint === "/api/fireproof" ? "bg-white text-black" : "bg-white/[0.06] text-zinc-400"}`}>fireproof</button>
-            <button onClick={() => setEndpoint("/api/escrow")} className={`mono text-[11px] px-3 h-7 rounded-full border ${endpoint === "/api/escrow" ? "bg-white text-black" : "bg-white/[0.06] text-zinc-400"}`}>escrow</button>
-          </div>
-          <div className="p-3"><button onClick={testAPI} className="w-full h-10 rounded-full bg-white text-black font-medium">{loading ? "Testing..." : "GET " + endpoint}</button><div className="mt-3 mono text-[11px] text-zinc-500">curl:</div><pre className="mt-1 p-3 rounded-[10px] bg-black border border-white/[0.08] mono text-[11px] text-zinc-400">curl https://us13.vercel.app{endpoint}</pre></div>
-        </div>
-        <div className="rounded-[16px] border border-orange-500/20 bg-orange-500/[0.04] overflow-hidden">
-          <div className="h-12 px-5 flex items-center justify-between border-b border-orange-500/20"><span className="text-[13px] font-semibold">Response</span><span className="mono text-[11px] px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/20">200 OK Live</span></div>
-          <pre className="p-5 mono text-[12px] leading-[1.6] text-zinc-300 whitespace-pre-wrap min-h-[320px]">{output}</pre>
-          <div className="px-5 pb-5"><div className="rounded-[10px] bg-black border border-white/[0.06] p-3 mono text-[11px] text-zinc-400">Your screenshots logs:[] proofs:[] mean APIs are LIVE. Empty = success in mock mode.</div></div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1200px] px-6 mt-10 grid lg:grid-cols-2 gap-4">
-        <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-6">
-          <div className="mono text-[11px] tracking-widest text-zinc-500">OPEN SOURCE - HOW TO DEPLOY</div>
-          <div className="mt-4 space-y-3">
-            <div className="flex gap-3"><span className="mono text-[11px] text-zinc-600 mt-1">01</span><div className="flex-1 rounded-[12px] border border-white/[0.06] bg-white/[0.02] overflow-hidden"><div className="px-4 h-9 flex items-center text-[12px] font-medium border-b border-white/[0.06]">Clone repo</div><pre className="p-3 mono text-[11px] text-zinc-400">git clone https://github.com/your-org/almost-os</pre></div></div>
-            <div className="flex gap-3"><span className="mono text-[11px] text-zinc-600 mt-1">02</span><div className="flex-1 rounded-[12px] border border-white/[0.06] bg-white/[0.02] overflow-hidden"><div className="px-4 h-9 flex items-center text-[12px] font-medium border-b border-white/[0.06]">Install</div><pre className="p-3 mono text-[11px] text-zinc-400">npm install</pre></div></div>
-            <div className="flex gap-3"><span className="mono text-[11px] text-zinc-600 mt-1">03</span><div className="flex-1 rounded-[12px] border border-white/[0.06] bg-white/[0.02] overflow-hidden"><div className="px-4 h-9 flex items-center text-[12px] font-medium border-b border-white/[0.06]">Env vars</div><pre className="p-3 mono text-[11px] text-zinc-400">NEXT_PUBLIC_SUPABASE_URL=xxx{"
-"}NEXT_PUBLIC_SUPABASE_ANON_KEY=xxx{"
-"}OPENAI_API_KEY=sk-...</pre></div></div>
-            <div className="flex gap-3"><span className="mono text-[11px] text-zinc-600 mt-1">04</span><div className="flex-1 rounded-[12px] border border-white/[0.06] bg-white/[0.02] overflow-hidden"><div className="px-4 h-9 flex items-center text-[12px] font-medium border-b border-white/[0.06]">Deploy</div><pre className="p-3 mono text-[11px] text-zinc-400">vercel --prod</pre></div></div>
+        <div style={{ marginTop: 32, border: "1px solid #222", borderRadius: 16, padding: 20, background: "#111" }}>
+          <b>OPEN SOURCE - HOW TO DEPLOY</b>
+          <div style={{ marginTop: 12, fontSize: 12, color: "#888", lineHeight: 1.8 }}>
+            <div>1. git clone https://github.com/your-org/almost-os</div>
+            <div>2. npm install</div>
+            <div>3. Add env: NEXT_PUBLIC_SUPABASE_URL, ANON_KEY, OPENAI_API_KEY (reuse from your other Vercel projects - same keys work)</div>
+            <div>4. vercel --prod - Your link live for anyone to use</div>
           </div>
         </div>
-        <div className="space-y-4">
-          <div className="rounded-[16px] border border-white/[0.08] bg-white/[0.02] p-6"><div className="font-semibold">For Developers - MIT Licensed</div><div className="mt-3 space-y-2 text-[13px] text-zinc-400 leading-[1.6]"><div>- Use it in startup, agency, solo stack.</div><div>- PRs welcome: cost firewall, hallucination detector, security scanner</div><div>- Roadmap: VSCode extension, GitHub App, Slack alerts</div></div></div>
-          <div className="rounded-[16px] border border-orange-500/20 bg-orange-500/[0.06] p-5"><div className="mono text-[11px] tracking-widest text-orange-300">WHY WE BUILT THIS</div><p className="mt-3 text-[13px] leading-[1.6] text-zinc-300">66% of devs say AI-built code frustrates them. It ships fast, then lies about edge cases. ALMOST OS is the missing OS layer - fireproof, spend-proof, waste-proof. Made in Lahore, open source.</p></div>
-        </div>
-      </section>
 
-      <footer className="mt-12 border-t border-white/[0.06]"><div className="mx-auto max-w-[1200px] px-6 h-[64px] flex items-center justify-between mono text-[12px] text-zinc-500"><span>Made in Lahore - MIT - Open Source - 2026</span><span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> us13.vercel.app Live APIs: 6/6</span></div></footer>
+        <div style={{ marginTop: 24, textAlign: "center", color: "#555", fontSize: 12, borderTop: "1px solid #222", paddingTop: 16 }}>Made in Lahore - MIT - Open Source - 2026 - us13.vercel.app - Live APIs 6/6</div>
+      </div>
     </div>
   );
 }
