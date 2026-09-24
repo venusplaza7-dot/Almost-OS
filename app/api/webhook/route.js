@@ -1,6 +1,6 @@
-import { fireproofPR } from '../../../lib/fireproof'
+itimport { fireproofPR } from '../../../lib/fireproof'
 import { checkSpend } from '../../../lib/spendFirewall'
-import { publishFix } from '../../../lib/antiFolio'
+import { publishFix } from '../../../lib/antifolio'
 import { supabase } from '../../../lib/supabase'
 
 export async function POST(req){
